@@ -22,7 +22,7 @@ WhatsApp API Frontend adalah web interface modern yang memungkinkan Anda mengiri
 ```
 ┌─────────────────────┐    HTTP Request    ┌─────────────────────┐
 │   Frontend Server   │ =================> │  WhatsApp API Server│
-│   localhost:8000    │                    │  xx.xx.xx.xx:5000 │
+│   localhost:8000    │                    │    xx.xx.xx.xx:5000 │
 │                     │                    │                     │
 │ • Web Interface     │                    │ • WhatsApp Bot      │
 │ • File Validation   │                    │ • Message Sending   │
