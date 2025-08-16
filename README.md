@@ -1,12 +1,14 @@
 # 🚀 WhatsApp API Frontend
 
 <div align="center">
+    
 ![WhatsApp API Frontend](https://img.shields.io/badge/WhatsApp-API%20Frontend-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-2.3+-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.0+-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
 **Complete web interface for WhatsApp API with separated server architecture**
+
 </div>
 
 ---
