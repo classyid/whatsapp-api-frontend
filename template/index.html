@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp API - Complete Media Support | Kirim Pesan, Gambar, Video, Audio</title>
+    <meta name="description" content="WhatsApp API lengkap untuk mengirim pesan text, gambar, video, audio, dokumen dan sticker. REST API mudah digunakan dengan dukungan berbagai format media.">
+    <meta name="keywords" content="whatsapp api, send message api, whatsapp bot, api wa, kirim pesan whatsapp, whatsapp business api">
+    <meta name="author" content="WhatsApp API Service">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="WhatsApp API - Complete Media Support">
+    <meta property="og:description" content="API lengkap untuk mengirim berbagai jenis pesan WhatsApp dengan mudah">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yoursite.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WhatsApp API - Complete Media Support">
+    <meta name="twitter:description" content="API lengkap untuk mengirim berbagai jenis pesan WhatsApp dengan mudah">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJDNi40NzcgMiAyIDYuNDc3IDIgMTJDMiAxNC4wMzYgMi42ODcgMTUuODk0IDMuODQgMTcuNDBMMi41OTIgMjAuNDA4QzIuNDE3IDIwLjk1IDIuODIgMjEuNDAzIDMuMzc4IDIxLjI5M0w2LjcyIDIwLjMyN0M4LjE4MSAyMS4zNTYgMTAuMDE0IDIyIDEyIDIyQzE3LjUyMyAyMiAyMiAxNy41MjMgMjIgMTJDMjIgNi40NzcgMTcuNTIzIDIgMTIgMloiIGZpbGw9IiMyNUQ5NjYiLz4KPHBhdGggZD0iTTE3LjUgMTNMMTUgMTAuNUwxNi41IDlMMTggMTAuNUwyMC41IDhMMjIgOS41TDE5LjUgMTJMMjIgMTQuNUwyMC41IDE2TDE4IDEzLjVMMTYuNSAxNUwxNSAxMy41TDE3LjUgMTNaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 50%, #075E54 100%);
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .api-endpoint {
+            border-left: 4px solid #25D366;
+            background: linear-gradient(90deg, rgba(37, 211, 102, 0.05) 0%, transparent 100%);
+        }
+        
+        .pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+        
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+        }
+        
+        .typing-animation::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .loading {
+            display: none;
+        }
+        
+        .loading.show {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <i class="fab fa-whatsapp text-3xl text-white"></i>
+                    <div>
+                        <h1 class="text-xl font-bold text-white">WhatsApp API</h1>
+                        <p class="text-xs text-green-100">Complete Media Support v2.0</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#features" class="text-white hover:text-green-100 transition-colors">
+                        <i class="fas fa-star mr-2"></i>Features
+                    </a>
+                    <a href="#endpoints" class="text-white hover:text-green-100 transition-colors">
+                        <i class="fas fa-code mr-2"></i>API Endpoints
+                    </a>
+                    <a href="#demo" class="text-white hover:text-green-100 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Try Demo
+                    </a>
+                    <div id="status-indicator" class="flex items-center">
+                        <div class="w-3 h-3 bg-green-400 rounded-full pulse-green mr-2"></div>
+                        <span class="text-green-100 text-sm">Online</span>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden pb-4 hidden">
+                <div class="flex flex-col space-y-3">
+                    <a href="#features" class="text-white hover:text-green-100 transition-colors">
+                        <i class="fas fa-star mr-2"></i>Features
+                    </a>
+                    <a href="#endpoints" class="text-white hover:text-green-100 transition-colors">
+                        <i class="fas fa-code mr-2"></i>API Endpoints
+                    </a>
+                    <a href="#demo" class="text-white hover:text-green-100 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Try Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <i class="fab fa-whatsapp text-8xl mb-6 animate-bounce"></i>
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">
+                    WhatsApp API<br>
+                    <span class="text-green-200 typing-animation">Complete Solution</span>
+                </h2>
+                <p class="text-xl md:text-2xl text-green-100 mb-8 max-w-3xl mx-auto">
+                    Kirim pesan text, gambar, video, audio, dokumen, dan sticker melalui WhatsApp dengan mudah menggunakan REST API yang powerful dan reliable.
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
+                <a href="#demo" class="bg-white text-green-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-50 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                    <i class="fas fa-rocket mr-2"></i>Try Demo Now
+                </a>
+                <a href="#endpoints" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-green-600 transition-all duration-200">
+                    <i class="fas fa-book mr-2"></i>View Documentation
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-paper-plane text-3xl text-green-200 mb-2"></i>
+                    <div class="text-2xl font-bold">6</div>
+                    <div class="text-green-100 text-sm">Message Types</div>
+                </div>
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-file text-3xl text-green-200 mb-2"></i>
+                    <div class="text-2xl font-bold">25+</div>
+                    <div class="text-green-100 text-sm">File Formats</div>
+                </div>
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-upload text-3xl text-green-200 mb-2"></i>
+                    <div class="text-2xl font-bold">64MB</div>
+                    <div class="text-green-100 text-sm">Max File Size</div>
+                </div>
+                <div class="glass-effect rounded-lg p-6">
+                    <i class="fas fa-clock text-3xl text-green-200 mb-2"></i>
+                    <div class="text-2xl font-bold">99.9%</div>
+                    <div class="text-green-100 text-sm">Uptime</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-star text-yellow-500 mr-3"></i>
+                    Fitur Lengkap & Powerful
+                </h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    API WhatsApp terlengkap dengan dukungan berbagai jenis media dan fitur canggih untuk semua kebutuhan bisnis Anda.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Text Messages -->
+                <div class="feature-card bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-gray-100">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-comment text-2xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Text Messages</h4>
+                    <p class="text-gray-600 mb-4">Kirim pesan text dengan format nomor otomatis dan validasi lengkap.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Auto format nomor telepon</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Support emoji & unicode</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Real-time delivery status</li>
+                    </ul>
+                </div>
+                
+                <!-- Image Messages -->
+                <div class="feature-card bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-gray-100">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-image text-2xl text-green-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Image Messages</h4>
+                    <p class="text-gray-600 mb-4">Upload dan kirim gambar dengan caption. Mendukung berbagai format.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>JPG, PNG, GIF, WebP</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Max 16MB per file</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Auto compress & optimize</li>
+                    </ul>
+                </div>
+                
+                <!-- Document Messages -->
+                <div class="feature-card bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-gray-100">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-file text-2xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Document Messages</h4>
+                    <p class="text-gray-600 mb-4">Kirim dokumen PDF, Office, dan file lainnya dengan mudah.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>PDF, DOC, XLS, PPT</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Max 32MB per file</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Archive support (ZIP, RAR)</li>
+                    </ul>
+                </div>
+                
+                <!-- Audio Messages -->
+                <div class="feature-card bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-gray-100">
+                    <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-microphone text-2xl text-red-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Audio Messages</h4>
+                    <p class="text-gray-600 mb-4">Voice messages dan audio files dengan kualitas tinggi.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>MP3, WAV, OGG, M4A</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Max 16MB per file</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Auto audio processing</li>
+                    </ul>
+                </div>
+                
+                <!-- Video Messages -->
+                <div class="feature-card bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-gray-100">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-video text-2xl text-yellow-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Video Messages</h4>
+                    <p class="text-gray-600 mb-4">Share video content dengan caption dan thumbnail otomatis.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>MP4, AVI, MOV, MKV</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Max 64MB per file</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Auto thumbnail generation</li>
+                    </ul>
+                </div>
+                
+                <!-- Sticker Messages -->
+                <div class="feature-card bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl border border-gray-100">
+                    <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-smile text-2xl text-pink-600"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Sticker Messages</h4>
+                    <p class="text-gray-600 mb-4">Kirim sticker custom dalam format WebP untuk interaksi yang fun.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>WebP format only</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Max 1MB per sticker</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Animated stickers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Endpoints Section -->
+    <section id="endpoints" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-code text-blue-500 mr-3"></i>
+                    API Endpoints
+                </h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    REST API yang mudah digunakan dengan dokumentasi lengkap dan contoh implementasi.
+                </p>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Send Message Endpoint -->
+                <div class="api-endpoint bg-white rounded-lg p-6 shadow-lg">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                        <div class="flex items-center mb-4 lg:mb-0">
+                            <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold mr-4">POST</span>
+                            <code class="text-lg font-mono text-gray-800">/api/send-message</code>
+                        </div>
+                        <div class="flex items-center text-green-600">
+                            <i class="fas fa-comment mr-2"></i>
+                            <span class="font-medium">Send Text Message</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Kirim pesan text ke nomor WhatsApp dengan format otomatis.</p>
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <code class="text-sm">
+                            <span class="text-blue-600">POST</span> /api/send-message<br>
+                            <span class="text-gray-500">Content-Type: application/json</span><br><br>
+                            {<br>
+                            &nbsp;&nbsp;"phone": "6281234567890",<br>
+                            &nbsp;&nbsp;"message": "Hello from WhatsApp API!"<br>
+                            }
+                        </code>
+                    </div>
+                </div>
+                
+                <!-- Send Image Endpoint -->
+                <div class="api-endpoint bg-white rounded-lg p-6 shadow-lg">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                        <div class="flex items-center mb-4 lg:mb-0">
+                            <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold mr-4">POST</span>
+                            <code class="text-lg font-mono text-gray-800">/api/send-image</code>
+                        </div>
+                        <div class="flex items-center text-green-600">
+                            <i class="fas fa-image mr-2"></i>
+                            <span class="font-medium">Send Image with Caption</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Upload dan kirim gambar dengan caption optional.</p>
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <code class="text-sm">
+                            <span class="text-blue-600">POST</span> /api/send-image<br>
+                            <span class="text-gray-500">Content-Type: multipart/form-data</span><br><br>
+                            phone: 6281234567890<br>
+                            caption: "📸 Beautiful sunset!"<br>
+                            file: [image file]
+                        </code>
+                    </div>
+                </div>
+                
+                <!-- Send Document Endpoint -->
+                <div class="api-endpoint bg-white rounded-lg p-6 shadow-lg">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                        <div class="flex items-center mb-4 lg:mb-0">
+                            <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold mr-4">POST</span>
+                            <code class="text-lg font-mono text-gray-800">/api/send-document</code>
+                        </div>
+                        <div class="flex items-center text-green-600">
+                            <i class="fas fa-file mr-2"></i>
+                            <span class="font-medium">Send Document</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Kirim dokumen PDF, Office, dan file lainnya.</p>
+                    <div class="bg-gray-100 rounded-lg p-4">
+                        <code class="text-sm">
+                            <span class="text-blue-600">POST</span> /api/send-document<br>
+                            <span class="text-gray-500">Content-Type: multipart/form-data</span><br><br>
+                            phone: 6281234567890<br>
+                            caption: "📄 Important document"<br>
+                            file: [document file]
+                        </code>
+                    </div>
+                </div>
+                
+                <!-- Other Endpoints Summary -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg p-6 shadow-lg border-l-4 border-red-500">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-microphone text-red-500 mr-2"></i>
+                            <h4 class="font-bold text-gray-800">Audio Messages</h4>
+                        </div>
+                        <code class="text-sm text-gray-600">POST /api/send-audio</code>
+                        <p class="text-sm text-gray-500 mt-2">Kirim file audio MP3, WAV, OGG</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 shadow-lg border-l-4 border-yellow-500">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-video text-yellow-500 mr-2"></i>
+                            <h4 class="font-bold text-gray-800">Video Messages</h4>
+                        </div>
+                        <code class="text-sm text-gray-600">POST /api/send-video</code>
+                        <p class="text-sm text-gray-500 mt-2">Kirim video MP4, AVI, MOV</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 shadow-lg border-l-4 border-pink-500">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-smile text-pink-500 mr-2"></i>
+                            <h4 class="font-bold text-gray-800">Sticker Messages</h4>
+                        </div>
+                        <code class="text-sm text-gray-600">POST /api/send-sticker</code>
+                        <p class="text-sm text-gray-500 mt-2">Kirim sticker WebP custom</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-play text-green-500 mr-3"></i>
+                    Try Demo
+                </h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Test semua fitur API langsung dari browser. Kirim pesan, gambar, dokumen, dan media lainnya.
+                </p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                <!-- Tab Navigation -->
+                <div class="flex flex-wrap justify-center mb-8 bg-white rounded-lg p-2 shadow-inner">
+                    <button onclick="showTab('text')" id="tab-text" class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                        <i class="fas fa-comment mr-2"></i>Text
+                    </button>
+                    <button onclick="showTab('image')" id="tab-image" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                        <i class="fas fa-image mr-2"></i>Image
+                    </button>
+                    <button onclick="showTab('document')" id="tab-document" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                        <i class="fas fa-file mr-2"></i>Document
+                    </button>
+                    <button onclick="showTab('audio')" id="tab-audio" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                        <i class="fas fa-microphone mr-2"></i>Audio
+                    </button>
+                    <button onclick="showTab('video')" id="tab-video" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                        <i class="fas fa-video mr-2"></i>Video
+                    </button>
+                    <button onclick="showTab('sticker')" id="tab-sticker" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all">
+                        <i class="fas fa-smile mr-2"></i>Sticker
+                    </button>
+                </div>
+                
+                <!-- Phone Number Input (common for all tabs) -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">
+                        <i class="fas fa-phone mr-2"></i>Nomor WhatsApp
+                    </label>
+                    <input type="tel" id="phone-input" placeholder="081234567890 atau +6281234567890" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <p class="text-sm text-gray-500 mt-1">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Format otomatis ke +62 (Indonesia)
+                    </p>
+                </div>
+                
+                <!-- Text Message Tab -->
+                <div id="text-tab" class="tab-content">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-comment mr-2"></i>Pesan Text
+                        </label>
+                        <textarea id="text-message" placeholder="Tulis pesan Anda di sini..." rows="4"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    <button onclick="sendTextMessage()" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        <span>Kirim Pesan</span>
+                        <i class="fas fa-spinner loading ml-2"></i>
+                    </button>
+                </div>
+                
+                <!-- Image Tab -->
+                <div id="image-tab" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-image mr-2"></i>Upload Gambar
+                        </label>
+                        <input type="file" id="image-file" accept="image/*"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">JPG, PNG, GIF, WebP - Max 16MB</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-comment mr-2"></i>Caption (Optional)
+                        </label>
+                        <textarea id="image-caption" placeholder="Caption untuk gambar..." rows="3"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    <button onclick="sendImageMessage()" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        <i class="fas fa-image mr-2"></i>
+                        <span>Kirim Gambar</span>
+                        <i class="fas fa-spinner loading ml-2"></i>
+                    </button>
+                </div>
+                
+                <!-- Document Tab -->
+                <div id="document-tab" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-file mr-2"></i>Upload Dokumen
+                        </label>
+                        <input type="file" id="document-file" 
+                               accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.rar,.7z"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">PDF, DOC, XLS, PPT, TXT, ZIP - Max 32MB</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-comment mr-2"></i>Caption (Optional)
+                        </label>
+                        <textarea id="document-caption" placeholder="Deskripsi dokumen..." rows="3"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    <button onclick="sendDocumentMessage()" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        <i class="fas fa-file mr-2"></i>
+                        <span>Kirim Dokumen</span>
+                        <i class="fas fa-spinner loading ml-2"></i>
+                    </button>
+                </div>
+                
+                <!-- Audio Tab -->
+                <div id="audio-tab" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-microphone mr-2"></i>Upload Audio
+                        </label>
+                        <input type="file" id="audio-file" accept="audio/*"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">MP3, WAV, OGG, M4A, AAC - Max 16MB</p>
+                    </div>
+                    <button onclick="sendAudioMessage()" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        <i class="fas fa-microphone mr-2"></i>
+                        <span>Kirim Audio</span>
+                        <i class="fas fa-spinner loading ml-2"></i>
+                    </button>
+                </div>
+                
+                <!-- Video Tab -->
+                <div id="video-tab" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-video mr-2"></i>Upload Video
+                        </label>
+                        <input type="file" id="video-file" accept="video/*"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">MP4, AVI, MOV, MKV, WebM - Max 64MB</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-comment mr-2"></i>Caption (Optional)
+                        </label>
+                        <textarea id="video-caption" placeholder="Caption untuk video..." rows="3"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    <button onclick="sendVideoMessage()" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        <i class="fas fa-video mr-2"></i>
+                        <span>Kirim Video</span>
+                        <i class="fas fa-spinner loading ml-2"></i>
+                    </button>
+                </div>
+                
+                <!-- Sticker Tab -->
+                <div id="sticker-tab" class="tab-content hidden">
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">
+                            <i class="fas fa-smile mr-2"></i>Upload Sticker
+                        </label>
+                        <input type="file" id="sticker-file" accept=".webp"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">WebP format only - Max 1MB</p>
+                    </div>
+                    <button onclick="sendStickerMessage()" class="w-full bg-green-500 text-white py-3 rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        <i class="fas fa-smile mr-2"></i>
+                        <span>Kirim Sticker</span>
+                        <i class="fas fa-spinner loading ml-2"></i>
+                    </button>
+                </div>
+                
+                <!-- Response Area -->
+                <div id="response-area" class="mt-8 p-4 bg-white rounded-lg border border-gray-200 hidden">
+                    <h4 class="font-bold text-gray-800 mb-2">
+                        <i class="fas fa-terminal mr-2"></i>Response
+                    </h4>
+                    <pre id="response-content" class="text-sm text-gray-600 whitespace-pre-wrap"></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fab fa-whatsapp text-3xl"></i>
+                        <div>
+                            <h4 class="text-xl font-bold">WhatsApp API</h4>
+                            <p class="text-green-200 text-sm">Complete Media Support v2.0</p>
+                        </div>
+                    </div>
+                    <p class="text-green-100 mb-4 max-w-md">
+                        API WhatsApp terlengkap untuk mengirim berbagai jenis pesan dengan mudah dan reliable. 
+                        Sempurna untuk bisnis, aplikasi, dan layanan customer service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-green-200 hover:text-white transition-colors">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-green-200 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-green-200 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold mb-4">Quick Links</h5>
+                    <ul class="space-y-2 text-green-100">
+                        <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#endpoints" class="hover:text-white transition-colors">API Documentation</a></li>
+                        <li><a href="#demo" class="hover:text-white transition-colors">Try Demo</a></li>
+                        <li><a href="/api/status" class="hover:text-white transition-colors">API Status</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold mb-4">Support</h5>
+                    <ul class="space-y-2 text-green-100">
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-green-400 mt-8 pt-8 text-center">
+                <p class="text-green-100">
+                    &copy; 2025 WhatsApp API Service. Made with 
+                    <i class="fas fa-heart text-red-400 mx-1"></i> 
+                    for developers.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.add('hidden'));
+            
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active', 'bg-green-500', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:text-gray-800');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            
+            // Add active class to selected tab button
+            const activeBtn = document.getElementById('tab-' + tabName);
+            activeBtn.classList.add('active', 'bg-green-500', 'text-white');
+            activeBtn.classList.remove('text-gray-600', 'hover:text-gray-800');
+        }
+
+        // Initialize default tab
+        showTab('text');
+
+        // API Base URL (change this to your server URL)
+        const API_BASE = window.location.origin;
+
+        // Show response function
+        function showResponse(response, isError = false) {
+            const responseArea = document.getElementById('response-area');
+            const responseContent = document.getElementById('response-content');
+            
+            responseArea.classList.remove('hidden');
+            responseContent.textContent = JSON.stringify(response, null, 2);
+            
+            if (isError) {
+                responseArea.classList.add('border-red-500', 'bg-red-50');
+                responseArea.classList.remove('border-gray-200', 'bg-white');
+            } else {
+                responseArea.classList.add('border-green-500', 'bg-green-50');
+                responseArea.classList.remove('border-gray-200', 'bg-white');
+            }
+            
+            // Scroll to response
+            responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Show loading state
+        function showLoading(button) {
+            const loading = button.querySelector('.loading');
+            const span = button.querySelector('span');
+            loading.classList.add('show');
+            span.textContent = 'Sending...';
+            button.disabled = true;
+        }
+
+        // Hide loading state
+        function hideLoading(button, originalText) {
+            const loading = button.querySelector('.loading');
+            const span = button.querySelector('span');
+            loading.classList.remove('show');
+            span.textContent = originalText;
+            button.disabled = false;
+        }
+
+        // Get phone number
+        function getPhoneNumber() {
+            const phone = document.getElementById('phone-input').value.trim();
+            if (!phone) {
+                throw new Error('Nomor WhatsApp harus diisi');
+            }
+            return phone;
+        }
+
+        // Send text message
+        async function sendTextMessage() {
+            const button = event.target;
+            const originalText = 'Kirim Pesan';
+            
+            try {
+                showLoading(button);
+                
+                const phone = getPhoneNumber();
+                const message = document.getElementById('text-message').value.trim();
+                
+                if (!message) {
+                    throw new Error('Pesan text harus diisi');
+                }
+
+                const response = await fetch(`${API_BASE}/api/send-message`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phone: phone,
+                        message: message
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResponse(result);
+                    document.getElementById('text-message').value = '';
+                } else {
+                    showResponse(result, true);
+                }
+                
+            } catch (error) {
+                showResponse({ error: error.message }, true);
+            } finally {
+                hideLoading(button, originalText);
+            }
+        }
+
+        // Send image message
+        async function sendImageMessage() {
+            const button = event.target;
+            const originalText = 'Kirim Gambar';
+            
+            try {
+                showLoading(button);
+                
+                const phone = getPhoneNumber();
+                const fileInput = document.getElementById('image-file');
+                const caption = document.getElementById('image-caption').value.trim();
+                
+                if (!fileInput.files[0]) {
+                    throw new Error('File gambar harus dipilih');
+                }
+
+                const formData = new FormData();
+                formData.append('phone', phone);
+                formData.append('file', fileInput.files[0]);
+                if (caption) formData.append('caption', caption);
+
+                const response = await fetch(`${API_BASE}/api/send-image`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResponse(result);
+                    fileInput.value = '';
+                    document.getElementById('image-caption').value = '';
+                } else {
+                    showResponse(result, true);
+                }
+                
+            } catch (error) {
+                showResponse({ error: error.message }, true);
+            } finally {
+                hideLoading(button, originalText);
+            }
+        }
+
+        // Send document message
+        async function sendDocumentMessage() {
+            const button = event.target;
+            const originalText = 'Kirim Dokumen';
+            
+            try {
+                showLoading(button);
+                
+                const phone = getPhoneNumber();
+                const fileInput = document.getElementById('document-file');
+                const caption = document.getElementById('document-caption').value.trim();
+                
+                if (!fileInput.files[0]) {
+                    throw new Error('File dokumen harus dipilih');
+                }
+
+                const formData = new FormData();
+                formData.append('phone', phone);
+                formData.append('file', fileInput.files[0]);
+                if (caption) formData.append('caption', caption);
+
+                const response = await fetch(`${API_BASE}/api/send-document`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResponse(result);
+                    fileInput.value = '';
+                    document.getElementById('document-caption').value = '';
+                } else {
+                    showResponse(result, true);
+                }
+                
+            } catch (error) {
+                showResponse({ error: error.message }, true);
+            } finally {
+                hideLoading(button, originalText);
+            }
+        }
+
+        // Send audio message
+        async function sendAudioMessage() {
+            const button = event.target;
+            const originalText = 'Kirim Audio';
+            
+            try {
+                showLoading(button);
+                
+                const phone = getPhoneNumber();
+                const fileInput = document.getElementById('audio-file');
+                
+                if (!fileInput.files[0]) {
+                    throw new Error('File audio harus dipilih');
+                }
+
+                const formData = new FormData();
+                formData.append('phone', phone);
+                formData.append('file', fileInput.files[0]);
+
+                const response = await fetch(`${API_BASE}/api/send-audio`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResponse(result);
+                    fileInput.value = '';
+                } else {
+                    showResponse(result, true);
+                }
+                
+            } catch (error) {
+                showResponse({ error: error.message }, true);
+            } finally {
+                hideLoading(button, originalText);
+            }
+        }
+
+        // Send video message
+        async function sendVideoMessage() {
+            const button = event.target;
+            const originalText = 'Kirim Video';
+            
+            try {
+                showLoading(button);
+                
+                const phone = getPhoneNumber();
+                const fileInput = document.getElementById('video-file');
+                const caption = document.getElementById('video-caption').value.trim();
+                
+                if (!fileInput.files[0]) {
+                    throw new Error('File video harus dipilih');
+                }
+
+                const formData = new FormData();
+                formData.append('phone', phone);
+                formData.append('file', fileInput.files[0]);
+                if (caption) formData.append('caption', caption);
+
+                const response = await fetch(`${API_BASE}/api/send-video`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResponse(result);
+                    fileInput.value = '';
+                    document.getElementById('video-caption').value = '';
+                } else {
+                    showResponse(result, true);
+                }
+                
+            } catch (error) {
+                showResponse({ error: error.message }, true);
+            } finally {
+                hideLoading(button, originalText);
+            }
+        }
+
+        // Send sticker message
+        async function sendStickerMessage() {
+            const button = event.target;
+            const originalText = 'Kirim Sticker';
+            
+            try {
+                showLoading(button);
+                
+                const phone = getPhoneNumber();
+                const fileInput = document.getElementById('sticker-file');
+                
+                if (!fileInput.files[0]) {
+                    throw new Error('File sticker harus dipilih');
+                }
+
+                const formData = new FormData();
+                formData.append('phone', phone);
+                formData.append('file', fileInput.files[0]);
+
+                const response = await fetch(`${API_BASE}/api/send-sticker`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResponse(result);
+                    fileInput.value = '';
+                } else {
+                    showResponse(result, true);
+                }
+                
+            } catch (error) {
+                showResponse({ error: error.message }, true);
+            } finally {
+                hideLoading(button, originalText);
+            }
+        }
+
+        // Check API status on page load
+        async function checkAPIStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/api/status`);
+                const result = await response.json();
+                
+                const statusIndicator = document.getElementById('status-indicator');
+                const statusDot = statusIndicator.querySelector('.pulse-green');
+                const statusText = statusIndicator.querySelector('span');
+                
+                if (result.bot_connected) {
+                    statusDot.className = 'w-3 h-3 bg-green-400 rounded-full pulse-green mr-2';
+                    statusText.textContent = 'Online';
+                    statusText.className = 'text-green-100 text-sm';
+                } else {
+                    statusDot.className = 'w-3 h-3 bg-red-400 rounded-full mr-2';
+                    statusText.textContent = 'Offline';
+                    statusText.className = 'text-red-200 text-sm';
+                }
+            } catch (error) {
+                console.error('Failed to check API status:', error);
+                const statusIndicator = document.getElementById('status-indicator');
+                const statusDot = statusIndicator.querySelector('div');
+                const statusText = statusIndicator.querySelector('span');
+                
+                statusDot.className = 'w-3 h-3 bg-gray-400 rounded-full mr-2';
+                statusText.textContent = 'Unknown';
+                statusText.className = 'text-gray-200 text-sm';
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // File size validation
+        function validateFileSize(input, maxSizeMB) {
+            const file = input.files[0];
+            if (file && file.size > maxSizeMB * 1024 * 1024) {
+                alert(`File terlalu besar. Maksimum ${maxSizeMB}MB`);
+                input.value = '';
+                return false;
+            }
+            return true;
+        }
+
+        // Add file size validation to file inputs
+        document.getElementById('image-file').addEventListener('change', function() {
+            validateFileSize(this, 16);
+        });
+
+        document.getElementById('document-file').addEventListener('change', function() {
+            validateFileSize(this, 32);
+        });
+
+        document.getElementById('audio-file').addEventListener('change', function() {
+            validateFileSize(this, 16);
+        });
+
+        document.getElementById('video-file').addEventListener('change', function() {
+            validateFileSize(this, 64);
+        });
+
+        document.getElementById('sticker-file').addEventListener('change', function() {
+            validateFileSize(this, 1);
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAPIStatus();
+            
+            // Check status every 30 seconds
+            setInterval(checkAPIStatus, 30000);
+        });
+
+        // Add typing animation effect
+        let i = 0;
+        const txt = 'Complete Solution';
+        const speed = 100;
+        const typingElement = document.querySelector('.typing-animation');
+        
+        function typeWriter() {
+            if (i < txt.length) {
+                typingElement.textContent = txt.substring(0, i + 1);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                setTimeout(() => {
+                    i = 0;
+                    typeWriter();
+                }, 2000);
+            }
+        }
+        
+        // Start typing animation after page load
+        setTimeout(typeWriter, 1000);
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            observer.observe(card);
+        });
+
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
